@@ -1,0 +1,139 @@
+---
+title: "Ruler Analysis for Bee Project"
+author: "KM Thomasson"
+date: "9/13/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+An important component of the starting phases of the big BEE project is the formulation of a consistent protocol by which every participant will abide. As part of this protocol, we needed to determine which measurement method would be both accessible, accurate and precise for all participants. For this reason, we performed an initial assessment of five standard rulers using a microscope reticle as a comparison.
+The five measurement were from four rulers which were available for purchase online:
+
+```{r}
+#Forestry Ruler which costs about $1.25
+#Forensics Ruler which costs about $2
+#Builders Ruler which costs about $35 (For this Ruler two measurements were taken to determine if specific calibration points, 1.5 and 3.5, yielded differences in accuracy on the same tool.
+#Microscope slide ruler which costs about $14
+```
+
+
+
+```{r libraries, include=FALSE}
+library(stats)
+library(ggplot2)
+library(tidyr)
+library(tidyverse)
+```
+For the analysis, three different individuals (Researchers) measured a sample of Bee tegula (intertegular span) using Image J software and calibrating the software using the selected measurement tools. A microscope reticle was also used as a standard and all measurements were compared against this standard. Researchers also recorded hairiness (hairy, not hairy), pigment (light, dark), and size (tiny, very small, small, medium, large) characteristics because of their potential to affect measurement accuracy. Data was collected and then separated by Measurement type and Recorder.A paired analysis was then performed by finding the difference in measurement from each measurement tool relative to the standard (reticle) for each specimen. The variance of the resultant values were then analyzed for differences in sample mean and variance relative to zero (the mean and variance of the reticle values set to zero).  
+
+```{r data manipulation}
+B_Rulers_complete <-read.csv("bee_ruler_main.csv")
+B_Rulers0 <-subset(B_Rulers_complete, select = -c(8,13))
+colnames(B_Rulers0)<-c("Barcode", "Recorder", "ForestryR", "ForensicsR", "MicroscopeR", "Builder1.5R", "Builder3.5R", "Red1x_Micro_R", "Pigment", "Hair", "Size")
+B_Rulers_main <- B_Rulers0 %>%
+  mutate(Forestry = ForestryR - Red1x_Micro_R, 
+         Forensics = ForensicsR - Red1x_Micro_R, 
+         Microscope = MicroscopeR - Red1x_Micro_R, 
+         Builder1.5 = Builder1.5R - Red1x_Micro_R, 
+         Builder3.5 = Builder3.5R - Red1x_Micro_R,
+         Red1x_Micro = Red1x_Micro_R- Red1x_Micro_R) 
+
+B_Rulers0.5 <-subset(B_Rulers_main, select = -c(3:7))
+B_Rulers1 <- B_Rulers0.5[ , c("Barcode", "Recorder" , "Pigment" , "Hair", "Size", "Red1x_Micro", "Forestry", "Forensics", "Microscope", "Builder1.5", "Builder3.5")]
+head(B_Rulers1)
+B_Rulers2<-pivot_longer(B_Rulers1, col=6:11, names_to="Type", values_to="Measurement")
+head(B_Rulers2)
+
+```
+
+Comparison of the variance and mean for all the data separated by measurement tool and the data of each researcher by measurement tool shows the deviance of each value from zero.
+
+```{r subsets and tables}
+Kat<-subset(B_Rulers1, Recorder=="KS")
+Zoe<-subset(B_Rulers1, Recorder=="ZW")
+Adam<-subset(B_Rulers1, Recorder=="AW")
+summary(B_Rulers1)
+summary(B_Rulers2)
+Mean1 <-c(mean(B_Rulers1$Forestry),mean(B_Rulers1$Forensics),mean(B_Rulers1$Microscope), mean(B_Rulers1$Builder1.5), mean(B_Rulers1$Builder3.5), mean(B_Rulers1$Red1x_Micro))
+Variance1 <-c(var(B_Rulers1$Forestry), var(B_Rulers1$Forensics), var(B_Rulers1$Microscope), var(B_Rulers1$Builder1.5), var(B_Rulers1$Builder3.5), var(B_Rulers1$Red1x_Micro))
+KatVar <- c(var(Kat[7]), var(Kat[8]), var(Kat[9]), var(Kat[10]), var(Kat[11]),var(Kat[6]))
+ZoeVar<- c(var(Zoe[7]), var(Zoe[8]), var(Zoe[9]), var(Zoe[10]), var(Zoe[11]), var(Zoe[6]))
+AdVar<- c(var(Adam[7]), var(Adam[8]), var(Adam[9]), var(Adam[10]), var(Adam[11]), var(Adam[6]))
+Var_Cats <- matrix(c(Mean1, Variance1, KatVar, ZoeVar, AdVar), ncol=6, byrow=TRUE)
+colnames(Var_Cats) <- c("Forestry", "Forensics", "Microscope", "Builder1.5", "Builder3.5", "Red1x_Micro")
+rownames(Var_Cats) <- c('Mean', 'Variance','R1 Var','R2 Var','R3 Var')
+var_cats <- as.table(Var_Cats)
+var_cats
+```
+
+Plotting the variation of measurement data from the standard by ruler type (Type) and by Recorder, there is  some variation in mean and some variation in variance (Below: Purple line is standard). Plots showed minimal and inconsistent variance between researchers: no one researcher consistently over or under-estimated relative to the estimations of other researchers. Rather the estimations changed based on the measurement tool used. Measurement tools showed variation, also also minimal.
+
+```{r echo=FALSE}
+Plot1 <-ggplot(data = B_Rulers2) + 
+  geom_boxplot(data = B_Rulers2, aes(Type, Measurement, color=factor(Type)))
+Plot1       
+Plot2 <-ggplot(data = B_Rulers2) + 
+  geom_boxplot(data = B_Rulers2, aes(Type, Measurement, color=factor(Recorder)))
+Plot2
+
+Plot3 <-ggplot(data = B_Rulers2) + 
+  geom_boxplot(data = B_Rulers2, aes(Recorder, Measurement, color = factor(Type)))
+Plot3
+```
+
+The affect of characteristics on variance of measurement indicated that variance relative to the standard increases as the size of the bee increases (Figures 4 and 5) and the presence of hair increases variance as well (Figures 6 and 7). These two factors may be confounded as bee hairiness affects the perception of bee size. Bee pigment did not consistently affect variance relative to the standard for the Recorder or by the measurement type (Figures 8 and 9).
+
+
+
+```{r}
+Plot4 <-ggplot(data = B_Rulers2) + 
+  geom_boxplot(data = B_Rulers2, aes(Type, Measurement, color = factor(Size)))
+Plot4
+
+Plot5 <-ggplot(data = B_Rulers2) + 
+  geom_boxplot(data = B_Rulers2, aes(Recorder, Measurement, color = factor(Size)))
+Plot5
+
+Plot6 <-ggplot(data = B_Rulers2) + 
+  geom_boxplot(data = B_Rulers2, aes(Type, Measurement, color = factor(Hair)))
+Plot6
+
+Plot7 <-ggplot(data = B_Rulers2) + 
+  geom_boxplot(data = B_Rulers2, aes(Recorder, Measurement, color = factor(Hair)))
+Plot7
+
+Plot8 <-ggplot(data = B_Rulers2) + 
+  geom_boxplot(data = B_Rulers2, aes(Type, Measurement, color = factor(Pigment)))
+Plot8
+
+Plot9 <-ggplot(data = B_Rulers2) + 
+  geom_boxplot(data = B_Rulers2, aes(Recorder, Measurement, color = factor(Pigment)))
+Plot9
+
+
+
+```
+
+These findings were substantiated with an ANOVA test using measurement type and recorder as factors in the resultant measurement values, and summarization of a GLM of the effects of measurement tool, recorder and bee body characteristics (Size, Hair, Pigment) and a semi-factorial assay of the interactions of these attributes (See line below). These results are initial and a secondary analysis with a larger sample size will be performed in the future. For now these results offer guidelines for analysis and estimation.
+
+
+```{r stats}
+summary(aov(Measurement ~ Recorder, data = B_Rulers2))
+summary(aov(Measurement ~ Type, data = B_Rulers2))
+
+BEES1 <-glm(Measurement ~ Recorder + Type + Pigment + Size + Hair + Pigment*Size*Hair + Recorder*Type + Type*Pigment + Type*Size + Type*Hair + Type*Hair*Size*Pigment+ Recorder*Size*Hair*Pigment, data = B_Rulers2)
+summary(BEES1)
+
+```
+
+While the ANOVA indicated no significant variation from the standard based on Recorder (F value 2.53,  P value 0.0809), there was a significant difference in measurement based on the measurement tool, or Type (F value 4.625, P value < 0.001) Additionally, based on the plots of the measurement data, we can see that there is marked reduction in outlier variance in the Microscope Reticule at 0.8x magnification relative to the other measurement options. 
+We can also see that there was less general variation between Researchers within the 
+The general linear model indicated that there was significant variance from the standard when the bee was hairy (P Value 0.00475) and when the bee was both large and dark or large and hairy for some recorders (dark and large  P values <0.001 and dark and hairy P values <0.005 for two researcher). 
+
+
+Builders are more expensive rulers and do not offer clear decreased variance from the standard. Researchers reported liking the Forensics Ruler, Calibrator's Microscope Ruler and the Builder's Ruler. Researchers that reported liking the Builders Ruler had no preference in the 1.5 or 3.5 calibration markers. The Forestry Ruler was the least liked by Researchers. 
+
+ 
