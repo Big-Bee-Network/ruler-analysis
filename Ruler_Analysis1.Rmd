@@ -24,13 +24,18 @@ The five measurement were from four rulers which were available for purchase onl
 #Builders Ruler which costs about $35 (For this Ruler two measurements were taken to determine if specific calibration points, 1.5 and 3.5, yielded differences in accuracy on the same tool.
 #Microscope slide ruler which costs about $14
 ```
+![Forestry Ruler](bee_images/forestry.JPG)
+![Forensics Ruler](bee_images/forensics.JPG)
+![Builders Ruler 1.5](bee_images/builders-ruler-1.5.JPG)
+![Builders Ruler 3.5](bee_images/builder-3.5.JPG)
+![Microscope Slide Ruler](bee_images/microscope-slide-ruler.JPG)
 
 ## Data
 The (CSV file)[https://github.com/Big-Bee-Network/ruler-analysis/blob/main/bee_ruler_main.csv] for this analysis
 
 The images used for this study are found here:  https://ucsb.box.com/s/tvw67tqc4msiiae6aw0kaodpuilf3zld
 
-Species used in this analysis ranged in body size and hariness. Those species are *Lasioglossum incompletum* (Halictidae), *Lasioglossum sisymbrii* (Halictidae), *Osmia brevis* (Megachilidae), *Ceratina arizonensis* (Apidae), *Xylocopa varipuncta* (Apidae), *Anthophora californica* (Apidae), *Hylaeus polifoli* (Colletidae), *Megachile fidelis* (Megachilidae), *Andrena chlorogaster* (Andrenidae), *Peponapis pruinosa* (Apidae), *Calliopsis* sp. (Andrenidae), *Bombus melanopygus*, *B. sonorus*, *B. vosnesenskii* (Apidae), *Agapostemon texanus* (Halictidae), *Sphecodes* sp. (Halictidae), *Augochlorella pomoniella* (Halictidae), *Xeromelecta californica* (Apidae), *Trachusa perdita* (Megachilidae), *Colletes* sp. (Colletidae)
+Species used in this analysis ranged in body size and hariness. Those species are *Lasioglossum incompletum* (Halictidae), *Lasioglossum sisymbrii* (Halictidae), *Osmia brevis* (Megachilidae), *Ceratina arizonensis* (Apidae), *Xylocopa varipuncta* (Apidae), *X. tabaniformis orpifex*, *Anthophora californica* (Apidae), *Hylaeus polifoli* (Colletidae), *Megachile fidelis* (Megachilidae), *Andrena chlorogaster* (Andrenidae), *Peponapis pruinosa* (Apidae), *Calliopsis* sp. (Andrenidae), *Bombus melanopygus*, *B. sonorus*, *B. vosnesenskii* (Apidae), *Agapostemon texanus* (Halictidae), *Sphecodes* sp. (Halictidae), *Augochlorella pomoniella* (Halictidae), *Xeromelecta californica* (Apidae), *Trachusa perdita* (Megachilidae), *Colletes* sp. (Colletidae)
 
 
 ```{r libraries, include=FALSE}
