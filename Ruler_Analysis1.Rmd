@@ -133,7 +133,7 @@ These findings were substantiated with an ANOVA test using measurement type and 
 ## Results Summary
 
 While the ANOVA indicated no significant variation from the standard based on Recorder (F value 2.53,  P value 0.0809), there was a significant difference in measurement based on the measurement tool, or Type (F value 4.625, P value < 0.001) Additionally, based on the plots of the measurement data, we can see that there is marked reduction in outlier variance in the Microscope Reticule at 0.8x magnification relative to the other measurement options. 
-We can also see that there was less general variation between Researchers within the 
+
 The general linear model indicated that there was significant variance from the standard when the bee was hairy (P Value 0.00475) and when the bee was both large and dark or large and hairy for some recorders (dark and large  P values <0.001 and dark and hairy P values <0.005 for two researcher). 
 
 Builders are more expensive rulers and do not offer clear decreased variance from the standard. Researchers reported liking the Forensics Ruler, Calibrator's Microscope Ruler and the Builder's Ruler. Researchers that reported liking the Builders Ruler had no preference in the 1.5 or 3.5 calibration markers. The Forestry Ruler was the least liked by Researchers. 
