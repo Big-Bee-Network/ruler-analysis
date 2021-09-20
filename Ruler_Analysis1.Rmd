@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-[[```Data```](#data) / [```Results Summary```](#results-summary) /  [```Appendex```](#appendex)
+[```Data```](#data) / [```Results Summary```](#results-summary) /  [```Appendex```](#appendex)
 
 ## Introduction
 
@@ -28,7 +28,9 @@ The five measurement were from four rulers which were available for purchase onl
 ## Data
 The (CSV file)[https://github.com/Big-Bee-Network/ruler-analysis/blob/main/bee_ruler_main.csv] for this analysis
 
-The images used for this study are found here https://ucsb.box.com/s/tvw67tqc4msiiae6aw0kaodpuilf3zld
+The images used for this study are found here:  https://ucsb.box.com/s/tvw67tqc4msiiae6aw0kaodpuilf3zld
+
+Species used in this analysis ranged in body size and hariness. Those species are *Lasioglossum incompletum* (Halictidae), *Lasioglossum sisymbrii* (Halictidae), *Osmia brevis* (Megachilidae), *Ceratina arizonensis* (Apidae), *Xylocopa varipuncta* (Apidae), *Anthophora californica* (Apidae), *Hylaeus polifoli* (Colletidae), *Megachile fidelis* (Megachilidae), *Andrena chlorogaster* (Andrenidae), *Peponapis pruinosa* (Apidae), *Calliopsis* sp. (Andrenidae), *Bombus melanopygus*, *B. sonorus*, *B. vosnesenskii* (Apidae), *Agapostemon texanus* (Halictidae), *Sphecodes* sp. (Halictidae), *Augochlorella pomoniella* (Halictidae), *Xeromelecta californica* (Apidae), *Trachusa perdita* (Megachilidae), *Colletes* sp. (Colletidae)
 
 
 ```{r libraries, include=FALSE}
