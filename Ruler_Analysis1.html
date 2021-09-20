@@ -171,13 +171,20 @@ pre code {
 </div>
 
 
+<p><a href="#Introduction"><code>Introduction</code></a> / <a href="#data"><code>Data</code></a> / <a href="#conclusion"><code>Conclusion</code></a> / <a href="#appendex"><code>Appendex</code></a></p>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>An important component of the starting phases of the Big-Bee project is the formulation of a consistent protocol for imaging specimens with labels. As part of this protocol, we needed to determine which measurement tool would be both accessible, accurate and precise for all participants. For this reason, we performed an initial assessment of five standard rulers using a microscope reticle as a comparison. The five measurement were from four rulers which were available for purchase online:</p>
+<p>An important component of the starting phases of the Big-Bee project is the formulation of a consistent protocol for imaging specimens with labels. As part of this protocol, we needed to determine which measurement tool would be both accessible, accurate and precise for all participants. For this reason, we performed an initial assessment of five standard rulers using a microscope reticle as a comparison.</p>
+<p>The five measurement were from four rulers which were available for purchase online:</p>
 <pre class="r"><code>#Forestry Ruler which costs about $1.25
 #Forensics Ruler which costs about $2
 #Builders Ruler which costs about $35 (For this Ruler two measurements were taken to determine if specific calibration points, 1.5 and 3.5, yielded differences in accuracy on the same tool.
 #Microscope slide ruler which costs about $14</code></pre>
+</div>
+<div id="data" class="section level2">
+<h2>Data</h2>
+<p>The (CSV file)[<a href="https://github.com/Big-Bee-Network/ruler-analysis/blob/main/bee_ruler_main.csv" class="uri">https://github.com/Big-Bee-Network/ruler-analysis/blob/main/bee_ruler_main.csv</a>] for this analysis</p>
+<p>The images used for this study are found here <a href="https://ucsb.box.com/s/tvw67tqc4msiiae6aw0kaodpuilf3zld" class="uri">https://ucsb.box.com/s/tvw67tqc4msiiae6aw0kaodpuilf3zld</a></p>
 </div>
 <div id="analysis" class="section level2">
 <h2>Analysis</h2>
@@ -311,6 +318,9 @@ Plot9</code></pre>
 <h2>Final Summary and Conclusion</h2>
 <p>While the ANOVA indicated no significant variation from the standard based on Recorder (F value 2.53, P value 0.0809), there was a significant difference in measurement based on the measurement tool, or Type (F value 4.625, P value &lt; 0.001) Additionally, based on the plots of the measurement data, we can see that there is marked reduction in outlier variance in the Microscope Reticule at 0.8x magnification relative to the other measurement options. We can also see that there was less general variation between Researchers within the The general linear model indicated that there was significant variance from the standard when the bee was hairy (P Value 0.00475) and when the bee was both large and dark or large and hairy for some recorders (dark and large P values &lt;0.001 and dark and hairy P values &lt;0.005 for two researcher).</p>
 <p>Builders are more expensive rulers and do not offer clear decreased variance from the standard. Researchers reported liking the Forensics Ruler, Calibrator’s Microscope Ruler and the Builder’s Ruler. Researchers that reported liking the Builders Ruler had no preference in the 1.5 or 3.5 calibration markers. The Forestry Ruler was the least liked by Researchers.</p>
+</div>
+<div id="appendex" class="section level2">
+<h2>Appendex</h2>
 <pre class="r"><code>summary(aov(Measurement ~ Recorder, data = B_Rulers2))</code></pre>
 <pre><code>##              Df Sum Sq Mean Sq F value Pr(&gt;F)  
 ## Recorder      2   0.49 0.24645    2.53 0.0809 .
