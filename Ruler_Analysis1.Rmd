@@ -8,8 +8,9 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+## Introduction
 
-An important component of the starting phases of the big BEE project is the formulation of a consistent protocol by which every participant will abide. As part of this protocol, we needed to determine which measurement method would be both accessible, accurate and precise for all participants. For this reason, we performed an initial assessment of five standard rulers using a microscope reticle as a comparison.
+An important component of the starting phases of the Big-Bee project is the formulation of a consistent protocol for imaging specimens with labels. As part of this protocol, we needed to determine which measurement tool would be both accessible, accurate and precise for all participants. For this reason, we performed an initial assessment of five standard rulers using a microscope reticle as a comparison.
 The five measurement were from four rulers which were available for purchase online:
 
 ```{r}
@@ -19,15 +20,15 @@ The five measurement were from four rulers which were available for purchase onl
 #Microscope slide ruler which costs about $14
 ```
 
-
-
 ```{r libraries, include=FALSE}
 library(stats)
 library(ggplot2)
 library(tidyr)
 library(tidyverse)
 ```
-For the analysis, three different individuals (Researchers) measured a sample of Bee tegula (intertegular span) using Image J software and calibrating the software using the selected measurement tools. A microscope reticle was also used as a standard and all measurements were compared against this standard. Researchers also recorded hairiness (hairy, not hairy), pigment (light, dark), and size (tiny, very small, small, medium, large) characteristics because of their potential to affect measurement accuracy. Data was collected and then separated by Measurement type and Recorder.A paired analysis was then performed by finding the difference in measurement from each measurement tool relative to the standard (reticle) for each specimen. The variance of the resultant values were then analyzed for differences in sample mean and variance relative to zero (the mean and variance of the reticle values set to zero).  
+
+## Analysis
+For the analysis, three different individuals (Researchers) measured the intertegular span using Image J software and calibrating the software using the selected measurement tools. A microscope reticle was also used as a standard and all measurements were compared against this standard. Researchers also recorded hairiness (hairy, not hairy), pigment (light, dark), and size (tiny, very small, small, medium, large) characteristics because of their potential to affect measurement accuracy. Data was collected and then separated by Measurement type and Recorder. A paired analysis was then performed by finding the difference in measurement from each measurement tool relative to the standard (reticle) for each specimen. The variance of the resultant values were then analyzed for differences in sample mean and variance relative to zero (the mean and variance of the reticle values set to zero).  
 
 ```{r data manipulation}
 B_Rulers_complete <-read.csv("bee_ruler_main.csv")
@@ -87,7 +88,6 @@ Plot3
 The affect of characteristics on variance of measurement indicated that variance relative to the standard increases as the size of the bee increases (Figures 4 and 5) and the presence of hair increases variance as well (Figures 6 and 7). These two factors may be confounded as bee hairiness affects the perception of bee size. Bee pigment did not consistently affect variance relative to the standard for the Recorder or by the measurement type (Figures 8 and 9).
 
 
-
 ```{r}
 Plot4 <-ggplot(data = B_Rulers2) + 
   geom_boxplot(data = B_Rulers2, aes(Type, Measurement, color = factor(Size)))
@@ -119,6 +119,14 @@ Plot9
 
 These findings were substantiated with an ANOVA test using measurement type and recorder as factors in the resultant measurement values, and summarization of a GLM of the effects of measurement tool, recorder and bee body characteristics (Size, Hair, Pigment) and a semi-factorial assay of the interactions of these attributes (See line below). These results are initial and a secondary analysis with a larger sample size will be performed in the future. For now these results offer guidelines for analysis and estimation.
 
+## Final Summary and Conclusion
+
+While the ANOVA indicated no significant variation from the standard based on Recorder (F value 2.53,  P value 0.0809), there was a significant difference in measurement based on the measurement tool, or Type (F value 4.625, P value < 0.001) Additionally, based on the plots of the measurement data, we can see that there is marked reduction in outlier variance in the Microscope Reticule at 0.8x magnification relative to the other measurement options. 
+We can also see that there was less general variation between Researchers within the 
+The general linear model indicated that there was significant variance from the standard when the bee was hairy (P Value 0.00475) and when the bee was both large and dark or large and hairy for some recorders (dark and large  P values <0.001 and dark and hairy P values <0.005 for two researcher). 
+
+
+Builders are more expensive rulers and do not offer clear decreased variance from the standard. Researchers reported liking the Forensics Ruler, Calibrator's Microscope Ruler and the Builder's Ruler. Researchers that reported liking the Builders Ruler had no preference in the 1.5 or 3.5 calibration markers. The Forestry Ruler was the least liked by Researchers. 
 
 ```{r stats}
 summary(aov(Measurement ~ Recorder, data = B_Rulers2))
@@ -129,11 +137,5 @@ summary(BEES1)
 
 ```
 
-While the ANOVA indicated no significant variation from the standard based on Recorder (F value 2.53,  P value 0.0809), there was a significant difference in measurement based on the measurement tool, or Type (F value 4.625, P value < 0.001) Additionally, based on the plots of the measurement data, we can see that there is marked reduction in outlier variance in the Microscope Reticule at 0.8x magnification relative to the other measurement options. 
-We can also see that there was less general variation between Researchers within the 
-The general linear model indicated that there was significant variance from the standard when the bee was hairy (P Value 0.00475) and when the bee was both large and dark or large and hairy for some recorders (dark and large  P values <0.001 and dark and hairy P values <0.005 for two researcher). 
-
-
-Builders are more expensive rulers and do not offer clear decreased variance from the standard. Researchers reported liking the Forensics Ruler, Calibrator's Microscope Ruler and the Builder's Ruler. Researchers that reported liking the Builders Ruler had no preference in the 1.5 or 3.5 calibration markers. The Forestry Ruler was the least liked by Researchers. 
 
  
